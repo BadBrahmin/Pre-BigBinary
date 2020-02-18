@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
 // const usersRouter = require('./routes/users');
+// const labelRouter = require('./routes/label');
 
 const app = express();
 
@@ -20,7 +21,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Connecting With DataBase
+if (process.env.NODE_ENV === 'development') {
+  const webpack = require('webpack');
+  const webpackConfig = require('./webpack.config');
+  const compiler = webpack(webpackConfig);
+
+  app.use(
+    require('webpack-dev-middleware')(compiler, {
+      noInfo: true,
+      publicPath: webpackConfig.output.publicPath,
+    }),
+  );
+
+  app.use(require('webpack-hot-middleware')(compiler));
+}
+
 mongoose.connect(
   'mongodb://localhost:27017/pre-bigBinary',
   { useNewUrlParser: true },
@@ -35,6 +50,7 @@ mongoose.connect(
 
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);
+// app.use('/api/v1/labels', labelRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
