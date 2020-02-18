@@ -10,3 +10,9 @@
   - Rewrite vs refactor: concept understanding, intro to StranglerFig Application, how to choose between rewrite and refactor based on business's position, tech debt.
 
 - Setup Feature workspace.
+
+## Feb 18, 2019
+
+- Finished the piece on Virtual DOM and researched more on Optimising React problem.
+
+- Express, webpack and frontend setup done. Schema updated and PR raised.
