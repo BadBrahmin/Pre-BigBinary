@@ -11,8 +11,14 @@
 
 - Setup Feature workspace.
 
-## Feb 18, 2019
+## Feb 18, 2020
 
 - Finished the piece on Virtual DOM and researched more on Optimising React problem.
 
 - Express, webpack and frontend setup done. Schema updated and PR raised.
+
+## Feb 19, 2020
+
+- Finished the piece on Optimising React (Problem_2).
+- First draft of Rewrite vs Refactor done.
+- Setup API and associated files for the backend of feature.
