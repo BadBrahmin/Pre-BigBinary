@@ -6,7 +6,7 @@ module.exports = {
     label
       .save()
       .then(data => {
-        res.json(data);
+        res.status(200).json(data);
       })
       .catch(err => {
         res.status(500).json({
@@ -21,7 +21,7 @@ module.exports = {
     Label.find({})
       .then(labels => {
         console.log(labels, 'labels');
-        res.json({ labels });
+        res.status(200).json({ labels });
       })
       .catch(err => {
         console.log(err, 'findall err');
@@ -74,7 +74,7 @@ module.exports = {
             message: 'Label not found with id' + id,
           });
         }
-        res.json(label);
+        res.status(200).json(label);
       })
       .catch(err => {
         if (err.kind === 'ObjectId') {
@@ -99,7 +99,7 @@ module.exports = {
             message: 'label not found with id ' + id,
           });
         }
-        return res.json({ message: 'label deleted successfully!' });
+        return res.status(200).json({ message: 'label deleted successfully!' });
       })
       .catch(err => {
         if (err.kind === 'ObjectId' || err.name === 'NotFound') {
