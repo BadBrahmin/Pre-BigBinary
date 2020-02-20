@@ -59,7 +59,7 @@ module.exports = {
 
     const { name, description, color, issues } = req.body;
     if (!name || !description || !color) {
-      return res.json({
+      return res.status(204).json({
         message: 'All fields required',
       });
     }
