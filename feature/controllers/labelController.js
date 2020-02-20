@@ -6,7 +6,7 @@ module.exports = {
     label
       .save()
       .then(data => {
-        res.send(data);
+        res.json(data);
       })
       .catch(err => {
         res.status(500).json({
@@ -17,6 +17,7 @@ module.exports = {
   },
 
   findAllLabels: (req, res) => {
+    console.log('hit find all');
     Label.find({})
       .then(labels => {
         console.log(labels, 'labels');
@@ -32,31 +33,33 @@ module.exports = {
   },
 
   findOneLabel: (req, res) => {
-    console.log(req.body);
-    Label.findById(req.params._id)
+    const id = req.params.id;
+    Label.findById(id)
       .then(label => {
         if (!label) {
           return res.status(404).send({
-            message: `Label not found with id ${req.params._id}`,
+            message: 'Label not found with id' + id,
           });
         }
-        res.json({ label });
+        res.status(200).json({ label });
       })
       .catch(err => {
         if (err.kind === 'ObjectId') {
           return res.status(404).send({
-            message: `Label not found with id ${req.params._id}`,
+            message: 'Label not found with id' + id,
           });
         }
         return res.status(500).json({
-          message: `Error retrieving label with id ${req.params._id}`,
+          message: 'Error retrieving label with id' + id,
         });
       });
   },
 
   updateLabel: (req, res) => {
+    const id = req.params.id;
+
     Label.findByIdAndUpdate(
-      req.body._id,
+      id,
       {
         name: req.body.name,
         description: req.body.description,
@@ -68,7 +71,7 @@ module.exports = {
       .then(label => {
         if (!label) {
           return res.status(404).send({
-            message: `label not found with id ${req.body._id}`,
+            message: 'Label not found with id' + id,
           });
         }
         res.json(label);
@@ -76,24 +79,24 @@ module.exports = {
       .catch(err => {
         if (err.kind === 'ObjectId') {
           return res.status(404).send({
-            message: `label not found with id ${req.params._id}`,
+            message: 'Label not found with id' + id,
           });
         }
         return res.status(500).json({
-          message: `Error updating label with id ${req.params._id}`,
+          message: 'Error updating label with id' + id,
         });
       });
   },
 
   deleteLabel: (req, res) => {
     console.log(req.params, 'params');
-    const { id } = req.params;
+    const id = req.params.id;
 
     Label.findByIdAndDelete(id)
       .then(label => {
         if (!label) {
           return res.status(404).send({
-            message: 'label not found with id ' + req.params.id,
+            message: 'label not found with id ' + id,
           });
         }
         return res.json({ message: 'label deleted successfully!' });
@@ -101,11 +104,11 @@ module.exports = {
       .catch(err => {
         if (err.kind === 'ObjectId' || err.name === 'NotFound') {
           return res.status(404).send({
-            message: 'label not found with id ' + req.params.id,
+            message: 'label not found with id ' + id,
           });
         }
         return res.status(500).send({
-          message: 'Could not delete label with id ' + req.params.id,
+          message: 'Could not delete label with id ' + id,
         });
       });
   },
