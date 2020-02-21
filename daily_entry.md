@@ -28,3 +28,7 @@
 - Updated the final loom video link.
 - Finished the piece on Rewrite vs Refactor (Problem_3).
 - Worked on the frontend of the feature. Basic integration and components.
+
+## Feb 21, 2020
+
+- Finished creating the frontend and integrating it.
