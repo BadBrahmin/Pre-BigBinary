@@ -22,3 +22,9 @@
 - Finished the piece on Optimising React (Problem_2).
 - First draft of Rewrite vs Refactor done.
 - Setup API and associated files for the backend of feature.
+
+## Feb 20, 2020
+
+- Updated the final loom video link.
+- Finished the piece on Rewrite vs Refactor (Problem_3).
+- Worked on the frontend of the feature. Basic integration and components.
