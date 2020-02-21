@@ -2,7 +2,8 @@ import React from 'react';
 import AddNewLabel from './AddNewLabel';
 import { Container, Table, Button, Card, Col, Row } from 'react-bootstrap';
 import '../../public/stylesheets/style.css';
-import EditLabel from './EditLabel';
+import EditLabel from './LabelEdit';
+import LabelCard from './LabelCard';
 
 class LabelList extends React.Component {
   constructor() {
@@ -10,7 +11,6 @@ class LabelList extends React.Component {
     this.state = {
       labels: '',
       displayAddNew: false,
-      displayEditLabel: false,
     };
   }
 
@@ -27,30 +27,6 @@ class LabelList extends React.Component {
       displayAddNew: !this.state.displayAddNew,
     });
   };
-
-  displayEditLabel = () => {
-    this.setState({
-      displayEditLabel: !this.state.displayEditLabel,
-    });
-  };
-
-  // handleUpdate = id => {
-  //   const data = {
-  //     name: 'whatever name',
-  //     description: 'whatever again',
-  //     color: 'purr',
-  //   };
-
-  //   fetch(`http://localhost:3000/api/v1/labels/${id}`, {
-  //     method: 'PUT',
-  //     body: JSON.stringify(data),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(updatedLabel => console.log(updatedLabel));
-  // };
 
   handleDelete = id => {
     fetch(`http://localhost:3000/api/v1/labels/${id}`, {
@@ -81,45 +57,11 @@ class LabelList extends React.Component {
         )}
 
         <br></br>
-        {!this.state.displayEditLabel ? (
-          <div>
-            {labels &&
-              labels.map(label => {
-                return (
-                  <Card key={label._id}>
-                    <Card.Body>
-                      <Row>
-                        <Col>
-                          <Card.Text xs={2}>{label.name}</Card.Text>
-                        </Col>
-                        <Col xs={5}>
-                          <Card.Text>{label.description}</Card.Text>
-                        </Col>
-                        <Col xs={1}>
-                          <Button
-                            variant='link'
-                            onClick={this.displayEditLabel}
-                          >
-                            Edit
-                          </Button>
-                        </Col>
-                        <Col xs={1}>
-                          <Button
-                            variant='link'
-                            onClick={() => this.handleDelete(label._id)}
-                          >
-                            Delete
-                          </Button>
-                        </Col>
-                      </Row>
-                    </Card.Body>
-                  </Card>
-                );
-              })}
-          </div>
-        ) : (
-          <EditLabel />
-        )}
+
+        {labels &&
+          labels.map(label => {
+            return <LabelCard props={label} />;
+          })}
       </Container>
     );
   }
