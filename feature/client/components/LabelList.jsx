@@ -28,16 +28,9 @@ class LabelList extends React.Component {
     });
   };
 
-  handleDelete = id => {
-    fetch(`http://localhost:3000/api/v1/labels/${id}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then(res => res.json())
-      .then(res => {
-        alert('Label Deleted!');
-      })
-      .then(this.componentDidMount());
+  handleSetState = () => {
+    console.log('handlesetstate');
+    this.componentDidMount();
   };
 
   render() {
@@ -60,7 +53,12 @@ class LabelList extends React.Component {
 
         {labels &&
           labels.map(label => {
-            return <LabelCard props={label} />;
+            return (
+              <LabelCard
+                props={label}
+                handleSetState={() => this.handleSetState}
+              />
+            );
           })}
       </Container>
     );

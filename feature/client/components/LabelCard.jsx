@@ -17,10 +17,23 @@ class LabelCard extends React.Component {
     this.setState({
       displayEditLabel: !this.state.displayEditLabel,
     });
+    this.props.handleSetState();
+  };
+
+  handleDelete = id => {
+    fetch(`http://localhost:3000/api/v1/labels/${id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => res.json())
+      .then(res => {
+        alert('Label Deleted!');
+      })
+      .then(this.props.handleSetState());
   };
 
   render() {
-    // console.log(this.props, 'card props');
+    console.log(this.props, 'card');
     return (
       <div>
         {!this.state.displayEditLabel ? (
@@ -28,7 +41,11 @@ class LabelCard extends React.Component {
             <Card.Body>
               <Row>
                 <Col>
-                  <Card.Text xs={2}>{this.props.props.name}</Card.Text>
+                  <Card.Text xs={2}>
+                    <Button variant='outline-success'>
+                      {this.props.props.name}
+                    </Button>
+                  </Card.Text>
                 </Col>
                 <Col xs={5}>
                   <Card.Text>{this.props.props.description}</Card.Text>
@@ -50,7 +67,7 @@ class LabelCard extends React.Component {
             </Card.Body>
           </Card>
         ) : (
-          <EditLabel props={this.props.props} action={this.displayEditLabel} />
+          <EditLabel props={this.props} action={this.displayEditLabel} />
         )}
       </div>
     );

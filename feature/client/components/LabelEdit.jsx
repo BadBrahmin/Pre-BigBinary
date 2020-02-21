@@ -14,7 +14,7 @@ class EditLabel extends React.Component {
   }
 
   componentDidMount() {
-    const id = this.props.props._id;
+    const id = this.props.props.props._id;
     console.log(id, 'cdm hit');
     fetch(`http://localhost:3000/api/v1/labels/${id}`)
       .then(res => res.json())
@@ -33,7 +33,7 @@ class EditLabel extends React.Component {
     const name = this.state.name;
     const description = this.state.description;
     const color = this.state.color;
-    const id = this.props.props._id;
+    const id = this.props.props.props._id;
 
     if (!name || !description || !color)
       return alert('Please enter all fields');
@@ -53,16 +53,17 @@ class EditLabel extends React.Component {
       .then(updatedLabel => {
         console.log(updatedLabel, 'updated');
         alert(`label ${updatedLabel.name} updated!`);
-      });
+      })
+      // .then(this.setState(this .state))
+      .then(this.props.action());
   };
 
   handleChange = event => {
-    // event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
-    console.log(this.state.label, 'propsedit');
+    console.log(this.props, 'edit');
     return (
       <Card>
         <Card.Body>
