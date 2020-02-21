@@ -1,7 +1,8 @@
 import React from 'react';
 import AddNewLabel from './AddNewLabel';
-import { Container, Table, Button, Card } from 'react-bootstrap';
+import { Container, Table, Button, Card, Col, Row } from 'react-bootstrap';
 import '../../public/stylesheets/style.css';
+import EditLabel from './EditLabel';
 
 class LabelList extends React.Component {
   constructor() {
@@ -9,6 +10,7 @@ class LabelList extends React.Component {
     this.state = {
       labels: '',
       displayAddNew: false,
+      displayEditLabel: false,
     };
   }
 
@@ -21,40 +23,45 @@ class LabelList extends React.Component {
   }
 
   displayAddNew = () => {
-    console.log('hit');
     this.setState({
       displayAddNew: !this.state.displayAddNew,
     });
   };
 
-  handleUpdate = () => {
-    const id = 'wherever the ID will come from';
-    const data = {
-      name: 'whatever name',
-      description: 'whatever again',
-      color: 'purr',
-    };
-
-    fetch(`http://localhost:3000/api/v1/labels/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => res.json())
-      .then(updatedLabel => console.log(updatedLabel));
+  displayEditLabel = () => {
+    this.setState({
+      displayEditLabel: !this.state.displayEditLabel,
+    });
   };
 
-  handleDelete = () => {
-    const id = 'something something';
+  // handleUpdate = id => {
+  //   const data = {
+  //     name: 'whatever name',
+  //     description: 'whatever again',
+  //     color: 'purr',
+  //   };
 
+  //   fetch(`http://localhost:3000/api/v1/labels/${id}`, {
+  //     method: 'PUT',
+  //     body: JSON.stringify(data),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then(res => res.json())
+  //     .then(updatedLabel => console.log(updatedLabel));
+  // };
+
+  handleDelete = id => {
     fetch(`http://localhost:3000/api/v1/labels/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     })
       .then(res => res.json())
-      .then(res => alert(res));
+      .then(res => {
+        alert('Label Deleted!');
+      })
+      .then(this.componentDidMount());
   };
 
   render() {
@@ -64,26 +71,55 @@ class LabelList extends React.Component {
     return (
       <Container>
         {this.state.displayAddNew ? (
-          <AddNewLabel />
+          <div>
+            <AddNewLabel action={this.displayAddNew} />
+          </div>
         ) : (
           <Button variant='outline-primary' onClick={this.displayAddNew}>
             Add New
           </Button>
         )}
 
-        {labels &&
-          labels.map(label => {
-            return (
-              <Card>
-                <Card.Body>
-                  <Card.Text>{label.name}</Card.Text>
-                  <Card.Text>{label.description}</Card.Text>
-                  <Card.Link href='#'>Update</Card.Link>
-                  <Card.Link href='#'>Delete</Card.Link>
-                </Card.Body>
-              </Card>
-            );
-          })}
+        <br></br>
+        {!this.state.displayEditLabel ? (
+          <div>
+            {labels &&
+              labels.map(label => {
+                return (
+                  <Card key={label._id}>
+                    <Card.Body>
+                      <Row>
+                        <Col>
+                          <Card.Text xs={2}>{label.name}</Card.Text>
+                        </Col>
+                        <Col xs={5}>
+                          <Card.Text>{label.description}</Card.Text>
+                        </Col>
+                        <Col xs={1}>
+                          <Button
+                            variant='link'
+                            onClick={this.displayEditLabel}
+                          >
+                            Edit
+                          </Button>
+                        </Col>
+                        <Col xs={1}>
+                          <Button
+                            variant='link'
+                            onClick={() => this.handleDelete(label._id)}
+                          >
+                            Delete
+                          </Button>
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                );
+              })}
+          </div>
+        ) : (
+          <EditLabel />
+        )}
       </Container>
     );
   }
