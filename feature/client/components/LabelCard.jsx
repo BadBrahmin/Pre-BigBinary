@@ -17,7 +17,7 @@ class LabelCard extends React.Component {
     this.setState({
       displayEditLabel: !this.state.displayEditLabel,
     });
-    this.props.handleSetState();
+    // this.props.action();
   };
 
   handleDelete = id => {

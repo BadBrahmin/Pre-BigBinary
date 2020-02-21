@@ -40,8 +40,8 @@ class AddNewLabel extends React.Component {
       .then(res => res.json())
       .then(label => {
         alert(`label ${label.name} created!`);
-      });
-    // .then(this.setState(this.state));
+      })
+      .then(this.props.action());
   };
   render() {
     // console.log(this.props, 'props');
