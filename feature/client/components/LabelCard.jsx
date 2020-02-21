@@ -20,7 +20,7 @@ class LabelCard extends React.Component {
   };
 
   render() {
-    console.log(this.props, 'card props');
+    // console.log(this.props, 'card props');
     return (
       <div>
         {!this.state.displayEditLabel ? (
@@ -50,7 +50,7 @@ class LabelCard extends React.Component {
             </Card.Body>
           </Card>
         ) : (
-          <EditLabel props={this.props.props} />
+          <EditLabel props={this.props.props} action={this.displayEditLabel} />
         )}
       </div>
     );

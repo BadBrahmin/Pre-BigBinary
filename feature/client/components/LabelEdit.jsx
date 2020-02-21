@@ -6,29 +6,34 @@ class EditLabel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      label: '',
+      // label: '',
+      name: '',
+      description: '',
+      color: '',
     };
   }
 
   componentDidMount() {
     const id = this.props.props._id;
+    console.log(id, 'cdm hit');
     fetch(`http://localhost:3000/api/v1/labels/${id}`)
       .then(res => res.json())
-      .then(labels => {
-        this.setState({ label: labels.label });
+      .then(label => {
+        console.log(label, 'received label');
+        this.setState({
+          name: label.label.name,
+          description: label.label.description,
+          color: label.label.color,
+        });
       });
   }
-
-  handleChange = event => {
-    event.preventDefault();
-    this.setState({ [event.target.name]: event.target.value });
-  };
 
   handleSubmit = event => {
     event.preventDefault();
     const name = this.state.name;
     const description = this.state.description;
     const color = this.state.color;
+    const id = this.props.props._id;
 
     if (!name || !description || !color)
       return alert('Please enter all fields');
@@ -50,6 +55,12 @@ class EditLabel extends React.Component {
         alert(`label ${updatedLabel.name} updated!`);
       });
   };
+
+  handleChange = event => {
+    // event.preventDefault();
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
   render() {
     console.log(this.state.label, 'propsedit');
     return (
@@ -59,7 +70,7 @@ class EditLabel extends React.Component {
             <Row>
               <Col>
                 <Form.Control
-                  value={this.state.label.name}
+                  value={this.state.name}
                   name='name'
                   placeholder='Label Name'
                   onChange={this.handleChange}
@@ -67,7 +78,7 @@ class EditLabel extends React.Component {
               </Col>
               <Col xs={5}>
                 <Form.Control
-                  value={this.state.label.description}
+                  value={this.state.description}
                   name='description'
                   placeholder='Description'
                   onChange={this.handleChange}
@@ -75,7 +86,7 @@ class EditLabel extends React.Component {
               </Col>
               <Col xs={2}>
                 <Form.Control
-                  value={this.state.label.color}
+                  value={this.state.color}
                   name='color'
                   placeholder='Color'
                   onChange={this.handleChange}
@@ -91,6 +102,7 @@ class EditLabel extends React.Component {
             Cancel
           </Button>
         </Card.Body>
+        <h1>TADA</h1>
       </Card>
     );
   }
