@@ -29,7 +29,6 @@ class LabelList extends React.Component {
   };
 
   handleSetState = () => {
-    console.log('handlesetstate');
     this.componentDidMount();
   };
 

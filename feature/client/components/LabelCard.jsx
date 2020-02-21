@@ -17,7 +17,6 @@ class LabelCard extends React.Component {
     this.setState({
       displayEditLabel: !this.state.displayEditLabel,
     });
-    // this.props.action();
   };
 
   handleDelete = id => {
@@ -33,7 +32,6 @@ class LabelCard extends React.Component {
   };
 
   render() {
-    console.log(this.props, 'card');
     return (
       <div>
         {!this.state.displayEditLabel ? (

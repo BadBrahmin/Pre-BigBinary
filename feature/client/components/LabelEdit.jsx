@@ -6,7 +6,6 @@ class EditLabel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // label: '',
       name: '',
       description: '',
       color: '',
@@ -15,7 +14,6 @@ class EditLabel extends React.Component {
 
   componentDidMount() {
     const id = this.props.props.props._id;
-    console.log(id, 'cdm hit');
     fetch(`http://localhost:3000/api/v1/labels/${id}`)
       .then(res => res.json())
       .then(label => {
@@ -52,10 +50,10 @@ class EditLabel extends React.Component {
       .then(res => res.json())
       .then(updatedLabel => {
         console.log(updatedLabel, 'updated');
-        alert(`label ${updatedLabel.name} updated!`);
+        // alert(`label ${updatedLabel.name} updated!`);
       })
-      // .then(this.setState(this .state))
-      .then(this.props.action());
+      .then(this.props.action())
+      .then(this.props.props.handleSetState());
   };
 
   handleChange = event => {
@@ -63,13 +61,12 @@ class EditLabel extends React.Component {
   };
 
   render() {
-    console.log(this.props, 'edit');
     return (
       <Card>
         <Card.Body>
           <Form>
             <Row>
-              <Col>
+              <Col xs={3}>
                 <Form.Control
                   value={this.state.name}
                   name='name'
@@ -96,14 +93,13 @@ class EditLabel extends React.Component {
             </Row>
           </Form>
           <br></br>
-          <Button variant='outline-primary' onClick={this.handleSubmit}>
+          <Button variant='outline-success' onClick={this.handleSubmit}>
             Submit
-          </Button>
-          <Button variant='outline-primary' onClick={this.props.action}>
+          </Button>{' '}
+          <Button variant='outline-danger' onClick={this.props.action}>
             Cancel
           </Button>
         </Card.Body>
-        <h1>TADA</h1>
       </Card>
     );
   }
