@@ -2,7 +2,6 @@ import React from 'react';
 import AddNewLabel from './AddNewLabel';
 import { Container, Table, Button, Card, Col, Row } from 'react-bootstrap';
 import '../../public/stylesheets/style.css';
-import EditLabel from './LabelEdit';
 import LabelCard from './LabelCard';
 
 class LabelList extends React.Component {
@@ -34,31 +33,36 @@ class LabelList extends React.Component {
 
   render() {
     const labels = this.state && this.state.labels;
-    console.log(this.state, 'labels');
 
     return (
       <Container>
-        {this.state.displayAddNew ? (
-          <div>
-            <AddNewLabel action={this.displayAddNew} />
-          </div>
-        ) : (
-          <Button variant='outline-primary' onClick={this.displayAddNew}>
-            Add New
-          </Button>
-        )}
+        <div>
+          {this.state.displayAddNew ? (
+            <div>
+              <AddNewLabel
+                action={this.displayAddNew}
+                handleSetState={this.handleSetState}
+              />
+            </div>
+          ) : (
+            <Button variant='outline-primary' onClick={this.displayAddNew}>
+              Add New
+            </Button>
+          )}
+        </div>
 
         <br></br>
-
-        {labels &&
-          labels.map(label => {
-            return (
-              <LabelCard
-                props={label}
-                handleSetState={() => this.handleSetState}
-              />
-            );
-          })}
+        <div>
+          {labels &&
+            labels.map(label => {
+              return (
+                <LabelCard
+                  props={label}
+                  handleSetState={() => this.handleSetState}
+                />
+              );
+            })}
+        </div>
       </Container>
     );
   }

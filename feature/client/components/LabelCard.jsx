@@ -40,13 +40,16 @@ class LabelCard extends React.Component {
               <Row>
                 <Col>
                   <Card.Text xs={2}>
-                    <Button variant='outline-success'>
+                    <Button variant='outline-dark'>
                       {this.props.props.name}
                     </Button>
                   </Card.Text>
                 </Col>
                 <Col xs={5}>
                   <Card.Text>{this.props.props.description}</Card.Text>
+                </Col>
+                <Col xs={1}>
+                  <Card.Text>{this.props.props.color}</Card.Text>
                 </Col>
                 <Col xs={1}>
                   <Button variant='link' onClick={this.displayEditLabel}>

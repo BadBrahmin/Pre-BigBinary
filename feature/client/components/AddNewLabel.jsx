@@ -41,15 +41,16 @@ class AddNewLabel extends React.Component {
       .then(label => {
         alert(`label ${label.name} created!`);
       })
-      .then(this.props.action());
+      .then(this.props.action())
+      .then(this.props.handleSetState());
   };
   render() {
-    // console.log(this.props, 'props');
     return (
       <Container>
         <Form>
+          <h2> Add New Label</h2>
           <Form.Row>
-            <Col>
+            <Col xs={3}>
               <Form.Control
                 value={this.state.name}
                 name='name'
@@ -57,7 +58,7 @@ class AddNewLabel extends React.Component {
                 onChange={this.handleChange}
               />
             </Col>
-            <Col>
+            <Col xs={5}>
               <Form.Control
                 value={this.state.description}
                 name='description'
@@ -65,7 +66,7 @@ class AddNewLabel extends React.Component {
                 onChange={this.handleChange}
               />
             </Col>
-            <Col>
+            <Col xs={2}>
               <Form.Control
                 value={this.state.color}
                 name='color'
@@ -73,14 +74,22 @@ class AddNewLabel extends React.Component {
                 onChange={this.handleChange}
               />
             </Col>
+            <Col xs={1}>
+              <Button
+                variant='outline-success'
+                type='submit'
+                onClick={this.handleSubmit}
+              >
+                Submit
+              </Button>{' '}
+            </Col>
+            <Col xs={1}>
+              <Button variant='outline-danger' onClick={this.props.action}>
+                Cancel
+              </Button>
+            </Col>
           </Form.Row>
         </Form>
-        <Button variant='outline-primary' onClick={this.handleSubmit}>
-          Submit
-        </Button>
-        <Button variant='outline-primary' onClick={this.props.action}>
-          Cancel
-        </Button>
       </Container>
     );
   }

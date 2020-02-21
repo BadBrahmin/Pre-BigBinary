@@ -66,7 +66,7 @@ class EditLabel extends React.Component {
         <Card.Body>
           <Form>
             <Row>
-              <Col xs={3}>
+              <Col xs={4}>
                 <Form.Control
                   value={this.state.name}
                   name='name'
@@ -74,7 +74,7 @@ class EditLabel extends React.Component {
                   onChange={this.handleChange}
                 />
               </Col>
-              <Col xs={5}>
+              <Col xs={4}>
                 <Form.Control
                   value={this.state.description}
                   name='description'
@@ -90,15 +90,18 @@ class EditLabel extends React.Component {
                   onChange={this.handleChange}
                 />
               </Col>
+              <Col xs={1}>
+                <Button variant='outline-success' onClick={this.handleSubmit}>
+                  Submit
+                </Button>{' '}
+              </Col>
+              <Col xs={1}>
+                <Button variant='outline-danger' onClick={this.props.action}>
+                  Cancel
+                </Button>
+              </Col>
             </Row>
           </Form>
-          <br></br>
-          <Button variant='outline-success' onClick={this.handleSubmit}>
-            Submit
-          </Button>{' '}
-          <Button variant='outline-danger' onClick={this.props.action}>
-            Cancel
-          </Button>
         </Card.Body>
       </Card>
     );
