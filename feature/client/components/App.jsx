@@ -4,15 +4,20 @@ import LabelList from './LabelList.jsx';
 import AddNewLabel from './AddNewLabel.jsx';
 // import '../assets/stylesheets/style.css';
 
+import {
+  withRouter,
+  Route,
+  Switch,
+  BrowserRouter as Router,
+} from 'react-router-dom';
+
 class App extends React.Component {
   render() {
     return (
       <>
         <Header />
         <br></br>
-        {/* <AddNewLabel /> */}
-        <br></br>
-        <LabelList />
+        <Route path='/' component={LabelList} />
       </>
     );
   }
