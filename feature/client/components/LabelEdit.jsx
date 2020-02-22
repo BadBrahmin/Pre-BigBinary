@@ -17,7 +17,6 @@ class EditLabel extends React.Component {
     fetch(`http://localhost:3000/api/v1/labels/${id}`)
       .then(res => res.json())
       .then(label => {
-        console.log(label, 'received label');
         this.setState({
           name: label.label.name,
           description: label.label.description,
@@ -50,7 +49,6 @@ class EditLabel extends React.Component {
       .then(res => res.json())
       .then(updatedLabel => {
         console.log(updatedLabel, 'updated');
-        // alert(`label ${updatedLabel.name} updated!`);
       })
       .then(this.props.action())
       .then(this.props.props.handleSetState());
