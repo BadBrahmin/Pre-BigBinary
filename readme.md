@@ -2,8 +2,6 @@
 
 ### Problems -
 
-​
-
 1. Explain the Virtual DOM, and a pragmatic overview of how React renders it to the DOM.
 
    [Link](https://github.com/BadBrahmin/Pre-BigBinary/blob/problems/problems/problem_1.md)
