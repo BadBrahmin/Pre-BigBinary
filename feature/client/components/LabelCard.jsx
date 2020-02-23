@@ -40,7 +40,11 @@ class LabelCard extends React.Component {
               <Row>
                 <Col>
                   <Card.Text xs={2}>
-                    <Button variant='outline-dark'>
+                    <Button
+                      variant='outline-light'
+                      style={{ background: '#' + `${this.props.props.color}` }}
+                      // style={{ background: '#ff0000' }}
+                    >
                       {this.props.props.name}
                     </Button>
                   </Card.Text>
@@ -48,9 +52,9 @@ class LabelCard extends React.Component {
                 <Col xs={5}>
                   <Card.Text>{this.props.props.description}</Card.Text>
                 </Col>
-                <Col xs={1}>
+                {/* <Col xs={1}>
                   <Card.Text>{this.props.props.color}</Card.Text>
-                </Col>
+                </Col> */}
                 <Col xs={1}>
                   <Button variant='link' onClick={this.displayEditLabel}>
                     Edit
