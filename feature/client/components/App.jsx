@@ -1,11 +1,22 @@
 import React from 'react';
-// import '../assets/stylesheets/style.css';
+import Header from './Header.jsx';
+import LabelList from './LabelList.jsx';
+import '../../public/stylesheets/style.css';
+
+import {
+  withRouter,
+  Route,
+  Switch,
+  BrowserRouter as Router,
+} from 'react-router-dom';
 
 class App extends React.Component {
   render() {
     return (
       <>
-        <h1>Github Issues</h1>
+        <Header />
+        <br></br>
+        <Route path='/' component={LabelList} />
       </>
     );
   }
