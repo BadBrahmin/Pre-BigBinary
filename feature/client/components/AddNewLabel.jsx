@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Button, Card, Form, Col } from 'react-bootstrap';
+import { Container, Button, Form, Col, InputGroup } from 'react-bootstrap';
 
 class AddNewLabel extends React.Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class AddNewLabel extends React.Component {
     return (
       <Container>
         <Form>
-          <h2> Add New Label</h2>
+          <h5> Add New Label</h5>
           <Form.Row>
             <Col xs={3}>
               <Form.Control
@@ -67,12 +67,17 @@ class AddNewLabel extends React.Component {
               />
             </Col>
             <Col xs={2}>
-              <Form.Control
-                value={this.state.color}
-                name='color'
-                placeholder='Color'
-                onChange={this.handleChange}
-              />
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text id='inputGroupPrepend'>#</InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  value={this.state.color}
+                  name='color'
+                  placeholder='Color hex code'
+                  onChange={this.handleChange}
+                />
+              </InputGroup>
             </Col>
             <Col xs={1}>
               <Button
