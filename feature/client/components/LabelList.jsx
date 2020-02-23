@@ -52,7 +52,7 @@ class LabelList extends React.Component {
         </div>
 
         <br></br>
-        <Card style={{ padding: '2rem' }} bg='light' border='dark'>
+        <Card style={{ padding: '2rem' }} bg='light'>
           <div>
             <strong>{labels && labels.length}</strong>
             <span> Labels</span>
@@ -68,6 +68,24 @@ class LabelList extends React.Component {
                 />
               );
             })}
+        </div>
+        <div
+          style={{
+            textAlign: 'center',
+            paddingTop: '3rem',
+            fontSize: '0.9rem',
+          }}
+        >
+          <span>-----</span> <br></br>
+          <span>
+            GitHub Labels Feature for Pre-BigBinary. Project on{' '}
+            <a
+              href='https://github.com/BadBrahmin/Pre-BigBinary/'
+              target='_blank'
+            >
+              GitHub
+            </a>
+          </span>
         </div>
       </Container>
     );
