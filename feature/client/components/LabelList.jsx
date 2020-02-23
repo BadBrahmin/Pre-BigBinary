@@ -52,6 +52,12 @@ class LabelList extends React.Component {
         </div>
 
         <br></br>
+        <Card style={{ padding: '2rem' }} bg='light' border='dark'>
+          <div>
+            <strong>{labels && labels.length}</strong>
+            <span> Labels</span>
+          </div>
+        </Card>
         <div>
           {labels &&
             labels.map(label => {
