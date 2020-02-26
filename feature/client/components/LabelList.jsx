@@ -63,6 +63,7 @@ class LabelList extends React.Component {
             labels.map(label => {
               return (
                 <LabelCard
+                  key={label._id}
                   props={label}
                   handleSetState={() => this.handleSetState}
                 />

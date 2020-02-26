@@ -1,6 +1,14 @@
 import React from 'react';
 
-import { Container, Button, Card, Form, Col, Row } from 'react-bootstrap';
+import {
+  Container,
+  Button,
+  Card,
+  Form,
+  Col,
+  Row,
+  InputGroup,
+} from 'react-bootstrap';
 
 class EditLabel extends React.Component {
   constructor(props) {
@@ -35,7 +43,7 @@ class EditLabel extends React.Component {
     if (!name || !description || !color)
       return alert('Please enter all fields');
 
-    const toUpdatedLabel = {
+    const toUpdateLabel = {
       name,
       description,
       color,
@@ -43,12 +51,12 @@ class EditLabel extends React.Component {
 
     fetch(`http://localhost:3000/api/v1/labels/${id}`, {
       method: 'PUT',
-      body: JSON.stringify(toUpdatedLabel),
+      body: JSON.stringify(toUpdateLabel),
       headers: { 'Content-Type': 'application/json' },
     })
       .then(res => res.json())
       .then(updatedLabel => {
-        console.log(updatedLabel, 'updated');
+        // alert(` ${updatedLabel.name} label is updated!`);
       })
       .then(this.props.action())
       .then(this.props.props.handleSetState());
@@ -81,13 +89,19 @@ class EditLabel extends React.Component {
                 />
               </Col>
               <Col xs={2}>
-                <Form.Control
-                  value={this.state.color}
-                  name='color'
-                  placeholder='Color'
-                  onChange={this.handleChange}
-                />
+                <InputGroup>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text id='inputGroupPrepend'>#</InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <Form.Control
+                    value={this.state.color}
+                    name='color'
+                    placeholder='Color hex code'
+                    onChange={this.handleChange}
+                  />
+                </InputGroup>
               </Col>
+
               <Col xs={1}>
                 <Button variant='outline-success' onClick={this.handleSubmit}>
                   Submit
