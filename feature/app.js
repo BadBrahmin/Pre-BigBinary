@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const labelRouter = require('./routes/label');
@@ -35,7 +36,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 mongoose.connect(
-  'mongodb://localhost:27017/pre-bigBinary',
+  // 'mongodb://localhost:27017/pre-bigBinary',
+  process.env.mongoURL,
   { useNewUrlParser: true },
   function(err) {
     if (err) {
