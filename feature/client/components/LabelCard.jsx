@@ -26,7 +26,7 @@ class LabelCard extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        alert('Label Deleted!');
+        // alert('Label Deleted!');
       })
       .then(this.props.handleSetState());
   };

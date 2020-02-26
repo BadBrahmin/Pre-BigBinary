@@ -104,7 +104,9 @@ module.exports = {
             message: 'label not found with id ' + id,
           });
         }
-        return res.status(200).json({ message: 'label deleted successfully!' });
+        return res
+          .status(200)
+          .json({ label, message: 'label deleted successfully!' });
       })
       .catch(err => {
         if (err.kind === 'ObjectId' || err.name === 'NotFound') {
